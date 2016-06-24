@@ -1,0 +1,25 @@
+<p><nobr>Coca-Cola</nobr><sup><small>&reg;</small></sup>&nbsp;&mdash; зарегистрированный товарный знак.</p>
+
+<!-- В тексте попался комментарий -->
+
+<style type="text/css">
+	SPAN.nobr { white-space: nowrap }
+</style>
+
+<script type="text/javascript">document.write('Этот текст не должен быть типографирован.')</script>
+
+<pre>   Я не хотел бы
+чтобы этот текст
+был   форматирован.</pre>
+
+<p>Все что вы хотели узнать о HTML.</p>
+
+В тексте встертилась ссылка: http://www.typograf.ru и e-mail: mail@typograf.ru
+
+* Программное обеспечение
+** Операционные системы
++++ Windows XP
++++ Linux RedHat
++++ MacOS X
+** Текстовые радакторы
+* Компьютеры

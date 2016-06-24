@@ -1,49 +1,41 @@
-mdash
-=====
+rutypograph
+===========
 
+Типограф, основанный на правилах от Евгения Муравьева. Начало было форком типографа mdash, чей питоновский код (который был по сути crude портом php-шного) был переписал в виде классов и определений без eval.
+
+Usage
+-----
+```python
+from rutypograph import Typograph
+e = Typograph()
+source = '- Это типограф?\n- Да ,это он....'
+print(e.process(source))
+```
+
+Result:
+```
+&mdash;&nbsp;Это типограф?
+&mdash;&nbsp;Да, это он&hellip;
+```
+
+License
+-------
+
+The MIT License (MIT)
+Copyright (c) 2016 nanopony
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#### mdash 
+
+Public Domain
 Evgeny Muravjev Typograph, http://mdash.ru
 Authors: Evgeny Muravjev & Alexander Drutsa  
-
 EMT - Evgeny Muravjev Typograph
 
-BUILDING
-========
-To build EMT you need php version 5.2 or newer.
-Suggested way to build typograph is to run builder.php through web-server.
+h2. Why so fork?
 
-E.g.:
-http://localhost/mdash/builder/builder.php
-
-Then you will have 3 options: build for php, build for python, build tests for python. 
-
-Resulting files are located on root of the project:
-EMT.php
-EMT.py
-
-
-RUNNING
-=======
-Use tools-php/online.php to test php version of the Typograph.
-
-tools-php/example.php contains few examples, how to use typograph inside php.
-tools-py/run.py contains examples, how to use typograph inside python.
-
-TESTING
-=======
-To run tests for php version you should go to the page tools-php/test.php through web-server.
-On this page you hit start to run all the tests.
-
-E.g.:
-http://localhost/mdash/tools-php/test.php
-
-To python tests you need first build test set from php version through builder/builder.php, and
-then run the tests:
-
-cd tools-py
-
-python test.py
-
-DEBUGGING
-=========
-Debug EMT, use debug.php
-This script will show all the rules tat were used, for selected text and show step by step log.
