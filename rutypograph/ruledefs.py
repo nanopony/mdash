@@ -811,6 +811,12 @@ RULEDEF_SYMBOLS = [
         "replacement": "&trade;"
     },
     {
+        "rule_id": "reg_replace",
+        "description": "Замена (R) на символ REG",
+        "pattern": "/®/i",
+        "replacement": "&reg;"
+    },
+    {
         "rule_id": "r_sign_replace",
         "description": "Замена (R) на символ зарегистрированной торговой марки",
         "pattern": [

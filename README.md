@@ -10,6 +10,8 @@ from rutypograph import Typograph
 e = Typograph()
 source = '- Это типограф?\n- Да ,это он....'
 print(e.process(source))
+# for html
+print(e.process_html(source))
 ```
 
 Result:
