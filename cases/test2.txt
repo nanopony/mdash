@@ -6,7 +6,7 @@
 	SPAN.nobr { white-space: nowrap }
 </style>
 
-<script type="text/javascript">document.write('Этот текст не должен быть типографирован.')</script>
+<script type="text/javascript">document.write('Этот текст -- не должен быть типографирован.')</script>
 
 <pre>   Я не хотел бы
 чтобы этот текст
