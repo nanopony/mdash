@@ -151,6 +151,7 @@ def util_oaquote_extra(text: str, environment):
 def util_to_unicode(text: str, environment):
     if environment.convert_html_entities_to_unicode:
         return html.unescape(text)
+    return text
 
 
 def build_sub_quotations(text: str, environment):

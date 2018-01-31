@@ -1,26 +1,36 @@
 rutypograph
 ===========
-Инструмент для предпубликационной обработки текста для веба
+Инструмент для предпубликационной обработки текста для веба.
 
-Типограф, основанный на правилах от Евгения Муравьева. Начало было форком типографа mdash, чей питоновский код (который был по сути crude портом php-шного) был переписал в виде классов и определений без eval.
+Типограф, основанный на правилах от Евгения Муравьева. Начало было форком типографа mdash, чей питоновский код (который был по сути crude портом php-шного) был переписан в виде классов и определений без eval.
+
+Тесты проходят не все, так как не все правила переписаны.
+
 
 Usage
 -----
 ```python
-from rutypograph import Typograph
-e = Typograph()
-source = '- Это типограф?\n- Да ,это он....'
-print(e.process(source))
-# for html
-print(e.process_html(source))
+from rutypograph import Typograph, get_default_environment
+
+settings = get_default_environment()
+settings.convert_html_entities_to_unicode = True
+print(Typograph.process("- Это \"типограф? \"Вторые кавычки\"\"\n- Да, это он...."))
+
+settings.convert_html_entities_to_unicode = False
+print(Typograph.process("- Это \"типограф? \"Вторые кавычки\"\"\n- Да, это он...."))
+
 ```
 
-Result:
+Result in unicode:
 ```
-&mdash;&nbsp;Это типограф?
+— Это «типограф? „Вторые кавычки“»
+— Да, это он…
+```
+Result in HTML Enitites:
+```
+&mdash;&nbsp;Это &laquo;типограф? &bdquo;Вторые кавычки&ldquo;&raquo;
 &mdash;&nbsp;Да, это он&hellip;
 ```
-
 License
 -------
 
