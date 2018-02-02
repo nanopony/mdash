@@ -98,18 +98,24 @@ class RuleRegex(Rule): # pylint: disable=too-few-public-methods, too-many-instan
 
         for pattern, replacement in zip(self.compiled_patterns, self.replacements):
             while True:
+                text_dry = text
                 if callable(replacement):
-                    text_wet = pattern.sub(lambda match: replacement(match, environment), text)  # pylint: disable=cell-var-from-loop
+                    text_wet = pattern.sub(lambda match: replacement(match, environment), text_dry)  # pylint: disable=cell-var-from-loop
                 else:
-                    text_wet = pattern.sub(replacement, text)
-                if text_wet != text:
-                    logger.debug("pattern: %s\nresult: %s"%(pattern, text_wet))
+                    text_wet = pattern.sub(replacement, text_dry)
 
-                if text_wet == text or not self.cycled:
-                    break
+                logger.debug("pattern: %s || dry: %s || result: %s", pattern, text_dry , text_wet)
 
                 text = text_wet
-        return text_wet
+
+                if not self.cycled:
+                    break
+
+                if text_dry == text:
+                    break
+
+
+        return text
 
 
 class RuleFunction(Rule): # pylint: disable=too-few-public-methods

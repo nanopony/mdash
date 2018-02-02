@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 
 import pytest
@@ -24,6 +25,7 @@ def test_all_rules():
     Also, execute "doctests" for each Rule, if defined
     """
     from rutypograph.rulesets import ALL_RULES
+    logging.basicConfig(level=logging.DEBUG)
     settings = get_default_environment()
     for rule in ALL_RULES:
         assert isinstance(rule, Rule)

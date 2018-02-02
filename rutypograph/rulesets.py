@@ -4,10 +4,35 @@ import re
 
 from .consts import QUOTE_FIRS_OPEN, QUOTE_FIRS_CLOSE, DOMAINS
 from .environment import TypographEnvironment
-
 from .rule import convert_ruledefs_to_rules
 from .rule_utilities import util_split_number, wrap_in_nowrap, wrap_in_typo_sup, utils_nowrap_ip_address, \
     wrap_in_typo_sub, build_sub_quotations, make_tag, util_oaquote_extra, util_to_unicode
+
+BASIC_CLEANUP = convert_ruledefs_to_rules([
+    {
+        "rule_id"    : "space_tabs_norm",
+        "description": "Удаление лишних пробельных символов и табуляций",
+        "pattern"    : "\s+",
+        "replacement": " ",
+        "doctests"   : [("А  в этом тексте  у меня    залип пробел.", "А в этом тексте у меня залип пробел.")]
+    },
+    {
+        "rule_id"    : "punkt_space",
+        "description": "Правка плохих запятых с проблеом",
+        "pattern"    :
+            [
+                "\s*(,|\.|!|\?)\s*",
+                "(,|\.|!|\?)\s+$",
+            ],
+
+        "replacement":
+            [
+                r"\1 ",
+                r"\1",
+            ],
+        "doctests"   : [("Тест , он такой !", "Тест, он такой!")]
+    },
+])
 
 RULEDEF_QUOTES = convert_ruledefs_to_rules([
     {
@@ -171,7 +196,7 @@ RULEDEF_DATES = convert_ruledefs_to_rules([
         "pattern"    : "/(с|по|период|середины|начала|начало|конца|конец|половины|в|между|\\([cс]\\)|\\&copy\\;)(\\s+|\\&nbsp\\;)([\\d]{4})(-|\\&mdash\\;|\\&minus\\;)([\\d]{4})(( |\\&nbsp\\;)?(г\\.г\\.|гг\\.|гг|г\\.|г)([^а-яёa-z]))?/eui",
         "replacement": lambda m, s: m.group(1) + m.group(2) + ((m.group(3) + m.group(4) + m.group(5) if int(
             m.group(3)) >= int(m.group(5)) else  m.group(3) + "&mdash;" + m.group(5))) + (
-            ("&nbsp;гг." if (m.group(6)) else "")) + (m.group(9) if (m.group(9)) else "")
+                                        ("&nbsp;гг." if (m.group(6)) else "")) + (m.group(9) if (m.group(9)) else "")
     },
     {
         "rule_id"    : "mdash_month_interval",
@@ -868,7 +893,7 @@ RULEDEF_DASH = convert_ruledefs_to_rules([
     }
 ])
 
-ALL_RULES = RULEDEF_QUOTES + RULEDEF_DASH + RULEDEF_SYMBOLS + RULEDEF_PUNKT + RULEDEF_NUMBERS + RULEDEF_SPACE + RULEDEF_ABBR + RULEDEF_NOBR + RULEDEF_DATES + RULEDEF_OPTS + RULEDEF_ETC
+ALL_RULES = BASIC_CLEANUP + RULEDEF_QUOTES + RULEDEF_DASH + RULEDEF_SYMBOLS + RULEDEF_PUNKT + RULEDEF_NUMBERS + RULEDEF_SPACE + RULEDEF_ABBR + RULEDEF_NOBR + RULEDEF_DATES + RULEDEF_OPTS + RULEDEF_ETC
 
 DEFAULT_SETTINGS = TypographEnvironment(ALL_RULES)
 
