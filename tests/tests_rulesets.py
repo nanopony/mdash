@@ -45,4 +45,6 @@ def test_old_tests(test_def):
     :return:
     """
     settings = get_default_environment()
+    settings.extra_style = ExtraStyles.AS_CLASS
+    settings.convert_html_entities_to_unicode = False
     assert Typograph.process(test_def['text'], settings, mangle_ampresand=False) == test_def['result']
